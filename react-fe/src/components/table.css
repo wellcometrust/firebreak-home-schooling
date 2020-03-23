@@ -1,0 +1,19 @@
+
+.table {
+    display: flex;
+    flex-direction: column;
+}
+
+.tableHeader {
+    font-weight: bold;
+}
+
+.tableRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.tableItem {
+    padding: 4px 6px;
+}
