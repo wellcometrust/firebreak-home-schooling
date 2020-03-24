@@ -5,38 +5,40 @@ import AdminContext from './components/AdminContext/AdminContext';
 
 import './assets/app.scss';
 
+const PIN_LENGTH = 4;
+
 function App() {
   let pinEl = null;
   const [pin, setPin] = useState('');
 
   const { adminPIN, isAdminActive, setAdminPIN, setAdminActive } = useContext(AdminContext);
 
-  const handleClick = (e) => {
-    setAdminActive(!isAdminActive);
-  }
-
-  const checkPIN = value => {
-    if (isAdminActive) {
-      setAdminPIN(value)
-    } else {
-
-    }
-  }
+  const checkPINLength = value => 
+    value.length === PIN_LENGTH;
+  
 
   const handleChange = value => {
     setPin(value);
   }
 
-  const handleComplete = () => {
-
-  }
+  const handleComplete = () => {}
 
   const handleSave = () => {
-
+    if (isAdminActive && checkPINLength(pin)) {
+      setAdminPIN(pin)
+      handleClear();
+    }
   }
 
   const handleUnlock = () => {
-    setAdminActive(true)
+    if (pin === adminPIN) {
+      setAdminActive(true)
+    }
+  }
+
+  const handleLock = () => {
+    setAdminActive(!isAdminActive);
+    handleClear();
   }
 
   const handleClear = () => {
@@ -48,13 +50,13 @@ function App() {
     <div className="App">
       <header className="App-header">
         {!adminPIN.length && <p>PIN not set</p>}
-        {isAdminActive && <button type="button" onClick={handleClick}>Lock</button>}
+        {isAdminActive && <button type="button" onClick={handleLock}>Lock</button>}
         
       </header>
       <main>
         <PinInput 
           focus
-          length={4} 
+          length={PIN_LENGTH} 
           initialValue=""
           ref={p => (pinEl = p)}
           secret 

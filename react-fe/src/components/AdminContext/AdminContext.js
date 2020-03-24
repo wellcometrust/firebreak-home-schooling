@@ -13,7 +13,7 @@ export const AdminContextProvider = ({ children }) => {
   const [state, setState] = useState({
     adminPIN: '',
     isAdminActive: false,
-    setAdminPIN: newPIN =>
+    setAdminPIN: newPIN => 
       setState(prevState => ({ ...prevState, adminPIN: newPIN })),
     setAdminActive: bool =>
       setState(prevState => ({ ...prevState, isAdminActive: bool }))
