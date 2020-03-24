@@ -1,33 +1,74 @@
-import React, { useContext } from 'react';
-import logo from './logo.svg';
+import React, { useContext, useState } from 'react';
+import PinInput from 'react-pin-input';
+
 import AdminContext from './components/AdminContext/AdminContext';
 
-import './App.css';
+import './assets/app.scss';
 
 function App() {
-  const { isAdminActive, toggleAdmin } = useContext(AdminContext);
+  let pinEl = null;
+  const [pin, setPin] = useState([]);
+
+  const { adminPIN, isAdminActive, setAdminPIN, toggleAdmin } = useContext(AdminContext);
 
   const handleClick = (e) => {
     toggleAdmin(!isAdminActive);
   }
 
+  const checkPIN = value => {
+    if (!adminPIN.length) {
+      setAdminPIN(value.split(''))
+    } else {
+
+    }
+  }
+
+  const handleChange = value => {
+    console.log(typeof value)
+    setPin(value)
+  }
+
+  const handleComplete = () => {
+
+  }
+
+  const handleSave = () => {
+
+  }
+
+  const handleUnlock = () => {
+
+  }
+
+  const handleClear = () => {
+    setPin('');
+    pinEl.clear();
+  }
+    
   return (
     <div className="App">
       <header className="App-header">
-        <button type="button" onClick={handleClick}>{isAdminActive ? 'deactivate admin': 'activate admin'}</button>
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        {!adminPIN.length && <p>PIN not set</p>}
+        {isAdminActive && <button type="button" onClick={handleClick}>Lock</button>}
+        
       </header>
+      <main>
+        <PinInput 
+          focus
+          length={4} 
+          initialValue=""
+          ref={p => (pinEl = p)}
+          secret 
+          type="numeric" 
+          inputStyle={{borderColor: 'red'}}
+          inputFocusStyle={{borderColor: 'blue'}}
+          onChange={handleChange}
+          onComplete={handleComplete}
+        />
+        <button type="button" onClick={handleSave}>Save</button>
+        <button type="button" onClick={handleUnlock}>Unlock</button>
+        <button type="button" onClick={handleClear}>Clear</button>
+      </main>
     </div>
   );
 }

@@ -1,6 +1,8 @@
 import React, { createContext, useState } from 'react';
 
 const defaultState = {
+  adminPIN: [],
+  setAdminPIN: () => {},
   isAdminActive: false,
   toggleAdmin: () => {}
 };
@@ -9,7 +11,10 @@ export const AdminContext = createContext(defaultState);
 
 export const AdminContextProvider = ({ children }) => {
   const [state, setState] = useState({
+    adminPIN: [],
     isAdminActive: false,
+    setAdminPIN: newPIN =>
+      setState(prevState => ({ ...prevState, adminPIN: [...state.adminPIN, newPIN] })),
     toggleAdmin: bool =>
       setState(prevState => ({ ...prevState, isAdminActive: bool }))
   });
