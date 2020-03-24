@@ -7,25 +7,24 @@ import './assets/app.scss';
 
 function App() {
   let pinEl = null;
-  const [pin, setPin] = useState([]);
+  const [pin, setPin] = useState('');
 
-  const { adminPIN, isAdminActive, setAdminPIN, toggleAdmin } = useContext(AdminContext);
+  const { adminPIN, isAdminActive, setAdminPIN, setAdminActive } = useContext(AdminContext);
 
   const handleClick = (e) => {
-    toggleAdmin(!isAdminActive);
+    setAdminActive(!isAdminActive);
   }
 
   const checkPIN = value => {
-    if (!adminPIN.length) {
-      setAdminPIN(value.split(''))
+    if (isAdminActive) {
+      setAdminPIN(value)
     } else {
 
     }
   }
 
   const handleChange = value => {
-    console.log(typeof value)
-    setPin(value)
+    setPin(value);
   }
 
   const handleComplete = () => {
@@ -37,7 +36,7 @@ function App() {
   }
 
   const handleUnlock = () => {
-
+    setAdminActive(true)
   }
 
   const handleClear = () => {
@@ -65,8 +64,11 @@ function App() {
           onChange={handleChange}
           onComplete={handleComplete}
         />
-        <button type="button" onClick={handleSave}>Save</button>
-        <button type="button" onClick={handleUnlock}>Unlock</button>
+        {isAdminActive ? (
+          <button type="button" onClick={handleSave}>Save</button>
+        ) : (
+          <button type="button" onClick={handleUnlock}>Unlock</button>
+        )}
         <button type="button" onClick={handleClear}>Clear</button>
       </main>
     </div>
