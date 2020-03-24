@@ -9,7 +9,7 @@ class Item extends React.Component {
         this.perchild = this.props.value.students.map((child, key) => 
             (
                 <div key={key} className="tableItem">
-                    <input type="checkbox" checked={child.done} />
+                    <input type="checkbox" checked={child.done} onChange={() => this.props.onChange(key)}/>
                 </div>
             )
         );
@@ -57,12 +57,10 @@ class Table extends React.Component {
         };
     }
 
-    handleChange(i) {
-        console.log(i);
+    handleChange(i, k) {
         let data = this.state.data.slice();
-        data[i].done = !data[i].done;
+        data[i].students[k].done = !data[i].students[k].done;
         this.setState({data: data});
-        console.log(this.state.data);
     }
 
     render() {
@@ -72,7 +70,7 @@ class Table extends React.Component {
         );
 
         this.items = this.state.data.map((item, i) =>
-            <Item key={i} value={this.state.data[i]} onChange={() => this.handleChange(i)}/>
+            <Item key={i} value={this.state.data[i]} onChange={(k) => this.handleChange(i, k)}/>
         );
 
         return (
