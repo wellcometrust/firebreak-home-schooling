@@ -2,6 +2,7 @@ import React from 'react';
 import PIN from './components/PIN/PIN';
 
 import './assets/app.scss';
+import MainView from './components/Views/main';
 
 function App() {
     
@@ -10,6 +11,7 @@ function App() {
       <header className="App-header">
         <PIN />
       </header>
+      <MainView />
     </div>
   );
 }
