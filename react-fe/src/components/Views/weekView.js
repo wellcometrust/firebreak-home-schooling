@@ -1,6 +1,6 @@
 import React from 'react';
 import { format, startOfWeek, endOfWeek } from 'date-fns';
-import Table from './table';
+import Table from '../Table/table';
 
 const DATA = {
     'Nathaniel' : [

@@ -1,5 +1,5 @@
 import React from 'react';
-import Table from './table';
+import Table from '../Table/table';
 import { format, add, sub } from 'date-fns';
 
 class DayView extends React.Component {
@@ -12,7 +12,7 @@ class DayView extends React.Component {
             columns: [
                 {name: 'Nathaniel'},
                 {name: 'Sam'},
-                {name:'Katy'},
+                {name: 'Katy'},
             ],
             rows: [
                 {'title': 'Expectation 1', data: [true, false, false]},
