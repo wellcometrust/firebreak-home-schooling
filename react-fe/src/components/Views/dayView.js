@@ -1,58 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Table from '../Table/table';
 import { format, add, sub } from 'date-fns';
 
-class DayView extends React.Component {
+const STUDENTS = [
+    {name: 'Nathaniel'},
+    {name: 'Sam'},
+    {name: 'Katy'},
+];
 
-    constructor(props) {
-        super(props);
+const ROWS = [
+    {'title': 'Expectation 1', data: [true, false, false]},
+    {'title': 'Expectation 2', data: [false, false, true]}
+];
 
-        this.state = {
-            day: new Date(),
-            columns: [
-                {name: 'Nathaniel'},
-                {name: 'Sam'},
-                {name: 'Katy'},
-            ],
-            rows: [
-                {'title': 'Expectation 1', data: [true, false, false]},
-                {'title': 'Expectation 2', data: [false, false, true]}
-            ]
-        }
-    }
+function DayView (props) {
+    const [day, setDay] = useState(new Date());
+    const [columns, setColumns] = useState(STUDENTS);
+    const [rows, setRows] = useState(ROWS);
 
-    previous_day() {
-        const day = sub(this.state.day, {days: 1});
-        this.setState({day: day});
-    }
-
-    next_day() {
-        const day = add(this.state.day, {days: 1});
-        this.setState({day: day});
-    }
-
-    handleChange(row, col) {
+    const handleChange = (row, col) => {
         console.log(row, col);
-        let rows = this.state.rows.slice();
-        rows[row].data[col] = !rows[row].data[col];
-        this.setState({rows: rows});
+        let newrow = rows.slice();
+        newrow[row].data[col] = !rows[row].data[col];
+        setRows(newrow);
     }
 
-
-    render() {
-
-        return (
-            <div>
-                <h1>{format(this.state.day, 'EEEE do LLLL')}</h1>
-                <Table columns={this.state.columns} rows={this.state.rows} onChange={(r, c) => this.handleChange(r, c)}/>
-                <button onClick={() => this.previous_day()}>Previous</button>
-                <button onClick={() => this.next_day()}>Next</button>
-            </div>
-        )
-
-
-    }
-
+    return (
+        <div>
+            <h1>{format(day, 'EEEE do LLLL')}</h1>
+            <Table columns={columns} rows={rows} onChange={(r, c) => handleChange(r, c)}/>
+            <button onClick={() => setDay(sub(day, {days: 1}))}>Previous</button>
+            <button onClick={() => setDay(add(day, {days: 1}))}>Next</button>
+        </div>
+    )
 }
 
 export default DayView;
