@@ -26,17 +26,6 @@ class Item extends React.Component {
 
 class Table extends React.Component {
 
-    constructor(props) {
-        super(props);
-        
-    }
-
-    handleChange(i, k) {
-        let data = this.state.data.slice();
-        data[i].students[k].done = !data[i].students[k].done;
-        this.setState({data: data});
-    }
-
     render() {
 
         this.cols = this.props.columns.map((col, i) => 
