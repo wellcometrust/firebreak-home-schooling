@@ -6,10 +6,10 @@ class Item extends React.Component {
 
     render() {
 
-        this.perchild = this.props.value.students.map((child, key) => 
+        this.perchild = this.props.value.data.map((child, key) => 
             (
                 <div key={key} className="tableItem">
-                    <input type="checkbox" checked={child.done} onChange={() => this.props.onChange(key)}/>
+                    <input type="checkbox" checked={child} onChange={() => this.props.onChange(key)}/>
                 </div>
             )
         );
@@ -28,33 +28,7 @@ class Table extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            data: [
-                {
-                    id: 1, 
-                    title: 'Thing to do ', 
-                    students: [
-                        {name: 'Nathaniel', done: false},
-                        {name: 'Sam', done: false},
-                        {name: 'Katy', done: true}
-                    ]
-                },
-                {
-                    id: 2, 
-                    title: 'Next task in line ', 
-                    students: [
-                        {name: 'Nathaniel', done: true},
-                        {name: 'Sam', done: false},
-                        {name: 'Katy', done: true}
-                    ]
-                },
-            ],
-            children: [
-                {name: 'Nathaniel'},
-                {name: 'Sam'},
-                {name:'Katy'},
-            ]
-        };
+        
     }
 
     handleChange(i, k) {
@@ -65,12 +39,12 @@ class Table extends React.Component {
 
     render() {
 
-        this.children = this.state.children.map((child, i) => 
-            <div className="tableItem" key={i}>{child.name}</div>
+        this.cols = this.props.columns.map((col, i) => 
+            <div className="tableItem" key={i}>{col.name}</div>
         );
 
-        this.items = this.state.data.map((item, i) =>
-            <Item key={i} value={this.state.data[i]} onChange={(k) => this.handleChange(i, k)}/>
+        this.rows = this.props.rows.map((row, i) =>
+            <Item key={i} value={row} onChange={(k) => this.props.onChange(i, k)}/>
         );
 
         return (
@@ -78,11 +52,11 @@ class Table extends React.Component {
                 <div className="tableHeader">
                     <div className="tableRow">
                         <div className="tableItem">Expectation</div>
-                        {this.children}
+                        {this.cols}
                     </div>
                 </div>
                 <div className="tableBody">
-                    {this.items}
+                    {this.rows}
                 </div>
             </div>
         )
