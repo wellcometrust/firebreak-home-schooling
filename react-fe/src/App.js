@@ -1,13 +1,13 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Table from './components/table';
+import DayView from './components/dayView';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Table />
+        <DayView />
       </header>
     </div>
   );
