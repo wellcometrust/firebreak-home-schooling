@@ -22,7 +22,7 @@ function PIN() {
   const handleComplete = () => {}
 
   const handleSave = () => {
-    if (isAdminActive && checkPINLength(pin)) {
+    if (checkPINLength(pin)) {
       setAdminPIN(pin)
       handleClear();
     }
@@ -31,6 +31,7 @@ function PIN() {
   const handleUnlock = () => {
     if (pin === adminPIN) {
       setAdminActive(true)
+      handleClear();
     }
   }
 
@@ -60,12 +61,9 @@ function PIN() {
         inputFocusStyle={{borderColor: 'blue'}}
         onChange={handleChange}
         onComplete={handleComplete}
-      />
-      {isAdminActive ? (
-        <button type="button" onClick={handleSave}>Save</button>
-      ) : (
-        <button type="button" onClick={handleUnlock}>Unlock</button>
-      )}
+        />
+      {!adminPIN.length && <button type="button" onClick={handleSave}>Save</button>}
+      {!!adminPIN.length && !isAdminActive && <button type="button" onClick={handleUnlock}>Unlock</button>}
       <button type="button" onClick={handleClear}>Clear</button>
     </>
   );
