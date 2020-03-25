@@ -53,7 +53,7 @@ function PIN() {
     setPin('');
     pinEl.clear();
   }
-    
+
   return (
     <>
       {!adminPIN.length && <p>PIN not set</p>}
