@@ -28,7 +28,9 @@ function DayView (props) {
     return (
         <div>
             <h1>{format(day, 'EEEE do LLLL')}</h1>
-            <Table columns={columns} rows={rows} onChange={(r, c) => handleChange(r, c)}/>
+            <div className="container">
+                <Table columns={columns} rows={rows} onChange={(r, c) => handleChange(r, c)}/>
+            </div>
             <button onClick={() => setDay(sub(day, {days: 1}))}>Previous</button>
             <button onClick={() => setDay(add(day, {days: 1}))}>Next</button>
         </div>

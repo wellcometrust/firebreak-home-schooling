@@ -1,11 +1,13 @@
 import React from 'react';
-import './table.css';
 
 function Item(props) {
     const perchild = props.value.data.map((child, key) => 
         (
             <div key={key} className="tableItem">
-                <input type="checkbox" checked={child} onChange={() => props.onChange(key)}/>
+                <label class="checkbox-container">
+                    <input type="checkbox" checked={child} onChange={() => props.onChange(key)}/>
+                    <span class="checkmark"></span>
+                </label>
             </div>
         )
     );
@@ -31,15 +33,11 @@ function Table(props) {
 
     return (
         <div className="table">
-            <div className="tableHeader">
-                <div className="tableRow">
-                    <div className="tableItem">Expectation</div>
-                    {cols}
-                </div>
+            <div className="tableRow tableHeader">
+                <div className="tableItem">Expectation</div>
+                {cols}
             </div>
-            <div className="tableBody">
-                {rows}
-            </div>
+            {rows}
         </div>
     )
         
