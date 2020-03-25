@@ -4,16 +4,25 @@ import Table from '../Table/table';
 
 const DATA = {
     'Nathaniel' : [
-        {'title': 'Expectation 1', data: [true, true, true, false, false, false, false]},
-        {'title': 'Expectation 2', data: [false, true, false, true, false, false, false]}
+        {'title': 'Love our family', data: [true, true, true, false, false, false, false]},
+        {'title': 'Listen to and respect each other', data: [false, true, true, true, false, false, false]},
+        {'title': 'Persevere and try hard', data: [true, true, false, true, false, false, false]},
+        {'title': 'Do as we are told first time', data: [false, false, false, false, false, false, false]},
+        {'title': 'Use positive words and actions', data: [false, true, false, true, false, false, false]}
     ],
     'Sam' : [
-        {'title': 'Expectation 1', data: [false, false, true, false, false, false, false]},
-        {'title': 'Expectation 2', data: [false, false, false, true, false, false, false]}
+        {'title': 'Love our family', data: [true, true, true, true, false, false, false]},
+        {'title': 'Listen to and respect each other', data: [false, true, false, true, false, false, false]},
+        {'title': 'Persevere and try hard', data: [false, false, false, true, false, false, false]},
+        {'title': 'Do as we are told first time', data: [false, true, false, true, false, false, false]},
+        {'title': 'Use positive words and actions', data: [true, false, false, true, false, false, false]}
     ],
     'Katy': [
-        {'title': 'Expectation 1', data: [true, true, true, true, false, false, false]},
-        {'title': 'Expectation 2', data: [true, true, true, true, false, false, false]}
+        {'title': 'Love our family', data: [true, true, true, false, false, false, false]},
+        {'title': 'Listen to and respect each other', data: [true, true, false, true, false, false, false]},
+        {'title': 'Persevere and try hard', data: [true, true, true, true, false, false, false]},
+        {'title': 'Do as we are told first time', data: [true, true, true, true, false, false, false]},
+        {'title': 'Use positive words and actions', data: [true, true, true, true, false, false, false]}
     ]
 
 }
