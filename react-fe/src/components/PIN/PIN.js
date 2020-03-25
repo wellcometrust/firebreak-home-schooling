@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import PinInput from 'react-pin-input';
+import classnames from 'classnames';
 
 import AdminContext from '../AdminContext/AdminContext';
 
@@ -10,6 +11,8 @@ function PIN() {
   let pinEl = null;
 
   const { adminPIN, isAdminActive, setAdminPIN, setAdminActive } = useContext(AdminContext);
+  
+  const pinClasses = classnames('pin-manager', { 'is-admin': isAdminActive });
   
   useEffect(() => {
     const storedPIN = localStorage.getItem('adminPIN');
@@ -61,8 +64,9 @@ function PIN() {
   const [isPINActive, setIsPINActive] = useState(true)
 
   return (
-    <div className="pin-manager">
+    <div className={pinClasses}>
       {!adminPIN.length && <p>PIN not set</p>}
+      {isAdminActive && <p>Admin mode active</p>}
 
       {isPINActive && <PinInput 
         focus
