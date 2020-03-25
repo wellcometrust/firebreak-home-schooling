@@ -1,3 +1,7 @@
+$dark-color: #06355a;
+$light-color: #619ece38;
+$bg-color: ghostwhite;
+
 
 .table {
     display: table;
@@ -6,12 +10,12 @@
     
     .tableRow {
         display: table-row;
-        background-color: ghostwhite;
+        background-color: $bg-color;
 
         &.tableHeader {
             font-weight: bold;
-            background-color: #06355a;
-            color: ghostwhite;
+            background-color: $dark-color;
+            color: $bg-color;
 
             .tableItem {
                 padding: 25px 6px;
@@ -54,17 +58,17 @@
         display: inline-block;
         height: 25px;
         width: 25px;
-        background-color: ghostwhite;
-        border: 1px solid #06355a;
+        background-color: $bg-color;
+        border: 1px solid $dark-color;
         border-radius: 25px;
     }
 
     &:hover input ~ .checkmark {
-        background-color: #619ece38;
+        background-color: $light-color;
     }
 
     & input:checked ~ .checkmark {
-        background-color: #619ece38;
+        background-color: $light-color;
     }
 
     .checkmark:after {
@@ -82,7 +86,7 @@
         top: -13px; 
         width: 8px;
         height: 25px;
-        border: solid #06355a;
+        border: solid $dark-color;
         border-width: 0 4px 4px 0;
         -webkit-transform: rotate(45deg);
         -ms-transform: rotate(45deg);
