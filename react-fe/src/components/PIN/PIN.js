@@ -17,6 +17,8 @@ function PIN() {
     if (localStorage && storedPIN) {
       setAdminPIN(storedPIN);
     }
+
+    return () => {}
   }, [])
 
   const checkPINLength = value => 
@@ -39,27 +41,30 @@ function PIN() {
 
   const handleUnlock = () => {
     if (pin === adminPIN) {
-      setAdminActive(true)
+      setAdminActive(true);
+      setIsPINActive(false);
       handleClear();
     }
   }
-
+  
   const handleLock = () => {
-    setAdminActive(!isAdminActive);
+    setAdminActive(false);
+    setIsPINActive(true);
     handleClear();
   }
 
   const handleClear = () => {
     setPin('');
-    pinEl.clear();
+    if (pinEl) pinEl.clear();
   }
 
-  return (
-    <>
-      {!adminPIN.length && <p>PIN not set</p>}
-      {isAdminActive && <button type="button" onClick={handleLock}>Lock</button>}
+  const [isPINActive, setIsPINActive] = useState(true)
 
-      <PinInput 
+  return (
+    <div className="pin-manager">
+      {!adminPIN.length && <p>PIN not set</p>}
+
+      {isPINActive && <PinInput 
         focus
         length={PIN_LENGTH} 
         initialValue=""
@@ -70,11 +75,12 @@ function PIN() {
         inputFocusStyle={{borderColor: 'blue'}}
         onChange={handleChange}
         onComplete={handleComplete}
-        />
+        />}
       {!adminPIN.length && <button type="button" onClick={handleSave}>Save</button>}
       {!!adminPIN.length && !isAdminActive && <button type="button" onClick={handleUnlock}>Unlock</button>}
-      <button type="button" onClick={handleClear}>Clear</button>
-    </>
+      {isPINActive && <button type="button" onClick={handleClear}>Clear</button>}
+      {isAdminActive && <button type="button" onClick={handleLock}>Lock</button>}
+    </div>
   );
 }
 
