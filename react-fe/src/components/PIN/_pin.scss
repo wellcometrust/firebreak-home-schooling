@@ -1,3 +1,16 @@
+.pin-manager {
+  align-items: center;
+  background: lightgrey;
+  display: flex;
+  flex-flow: row nowrap;
+  min-height: 100px;
+  padding: 30px;
+
+  &.is-admin {
+    border-top: 10px solid limegreen;
+  }
+}
+
 .pincode-input-container {}
 
 .pincode-input-text

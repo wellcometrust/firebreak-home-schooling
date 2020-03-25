@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import AdminContext from '../AdminContext/AdminContext';
 
 function Item(props) {
+    const { isAdminActive } = useContext(AdminContext);
+
     const perchild = props.value.data.map((child, key) => 
         (
             <div key={key} className="tableItem">
                 <label class="checkbox-container">
-                    <input type="checkbox" checked={child} onChange={() => props.onChange(key)}/>
+                    <input disabled={!isAdminActive} type="checkbox" checked={child} onChange={() => props.onChange(key)}/>
                     <span class="checkmark"></span>
                 </label>
             </div>
