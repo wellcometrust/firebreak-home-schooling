@@ -1,15 +1,16 @@
 import React, { useContext } from 'react';
 import AdminContext from '../AdminContext/AdminContext';
 
-import './table.css';
-
 function Item(props) {
     const { isAdminActive } = useContext(AdminContext);
 
     const perchild = props.value.data.map((child, key) => 
         (
             <div key={key} className="tableItem">
-                <input disabled={!isAdminActive} type="checkbox" checked={child} onChange={() => props.onChange(key)}/>
+                <label class="checkbox-container">
+                    <input disabled={!isAdminActive} type="checkbox" checked={child} onChange={() => props.onChange(key)}/>
+                    <span class="checkmark"></span>
+                </label>
             </div>
         )
     );
@@ -35,15 +36,11 @@ function Table(props) {
 
     return (
         <div className="table">
-            <div className="tableHeader">
-                <div className="tableRow">
-                    <div className="tableItem">Expectation</div>
-                    {cols}
-                </div>
+            <div className="tableRow tableHeader">
+                <div className="tableItem">Expectation</div>
+                {cols}
             </div>
-            <div className="tableBody">
-                {rows}
-            </div>
+            {rows}
         </div>
     )
         

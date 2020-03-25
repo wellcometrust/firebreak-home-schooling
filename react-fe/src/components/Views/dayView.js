@@ -9,8 +9,11 @@ const STUDENTS = [
 ];
 
 const ROWS = [
-    {'title': 'Expectation 1', data: [true, false, false]},
-    {'title': 'Expectation 2', data: [false, false, true]}
+    {'title': 'Love our family', data: [true, true, true]},
+    {'title': 'Listen to and respect each other', data: [false, false, true]},
+    {'title': 'Persevere and try hard', data: [false, false, true]},
+    {'title': 'Do as we are told first time', data: [false, true, true]},
+    {'title': 'Use positive words and actions', data: [false, true, true]}
 ];
 
 function DayView (props) {
@@ -28,7 +31,9 @@ function DayView (props) {
     return (
         <div>
             <h1>{format(day, 'EEEE do LLLL')}</h1>
-            <Table columns={columns} rows={rows} onChange={(r, c) => handleChange(r, c)}/>
+            <div className="container">
+                <Table columns={columns} rows={rows} onChange={(r, c) => handleChange(r, c)}/>
+            </div>
             <button onClick={() => setDay(sub(day, {days: 1}))}>Previous</button>
             <button onClick={() => setDay(add(day, {days: 1}))}>Next</button>
         </div>
