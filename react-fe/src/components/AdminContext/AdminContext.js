@@ -1,21 +1,21 @@
 import React, { createContext, useState } from 'react';
 
 const defaultState = {
-  adminPIN: [],
+  adminPIN: '',
   setAdminPIN: () => {},
   isAdminActive: false,
-  toggleAdmin: () => {}
+  setAdminActive: () => {}
 };
 
 export const AdminContext = createContext(defaultState);
 
 export const AdminContextProvider = ({ children }) => {
   const [state, setState] = useState({
-    adminPIN: [],
+    adminPIN: '',
     isAdminActive: false,
-    setAdminPIN: newPIN =>
-      setState(prevState => ({ ...prevState, adminPIN: [...state.adminPIN, newPIN] })),
-    toggleAdmin: bool =>
+    setAdminPIN: newPIN => 
+      setState(prevState => ({ ...prevState, adminPIN: newPIN })),
+    setAdminActive: bool =>
       setState(prevState => ({ ...prevState, isAdminActive: bool }))
   });
 
