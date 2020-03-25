@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import PinInput from 'react-pin-input';
 
 import AdminContext from '../AdminContext/AdminContext';
@@ -10,6 +10,14 @@ function PIN() {
   let pinEl = null;
 
   const { adminPIN, isAdminActive, setAdminPIN, setAdminActive } = useContext(AdminContext);
+  
+  useEffect(() => {
+    const storedPIN = localStorage.getItem('adminPIN');
+
+    if (localStorage && storedPIN) {
+      setAdminPIN(storedPIN);
+    }
+  }, [])
 
   const checkPINLength = value => 
     value.length === PIN_LENGTH;
@@ -23,7 +31,8 @@ function PIN() {
 
   const handleSave = () => {
     if (checkPINLength(pin)) {
-      setAdminPIN(pin)
+      setAdminPIN(pin);
+      localStorage.setItem('adminPIN', pin);
       handleClear();
     }
   }
