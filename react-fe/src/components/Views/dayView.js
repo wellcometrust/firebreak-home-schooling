@@ -9,8 +9,11 @@ const STUDENTS = [
 ];
 
 const ROWS = [
-    {'title': 'Expectation 1', data: [true, false, false]},
-    {'title': 'Expectation 2', data: [false, false, true]}
+    {'title': 'Love our family', data: [true, true, true]},
+    {'title': 'Listen to and respect each other', data: [false, false, true]},
+    {'title': 'Persevere and try hard', data: [false, false, true]},
+    {'title': 'Do as we are told first time', data: [false, true, true]},
+    {'title': 'Use positive words and actions', data: [false, true, true]}
 ];
 
 function DayView (props) {
