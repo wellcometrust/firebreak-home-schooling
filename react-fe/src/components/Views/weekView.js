@@ -4,25 +4,31 @@ import Table from '../Table/table';
 
 const DATA = {
     'Nathaniel' : [
-        {'title': 'Love our family', data: [true, true, true, false, false, false, false]},
-        {'title': 'Listen to and respect each other', data: [false, true, true, true, false, false, false]},
-        {'title': 'Persevere and try hard', data: [true, true, false, true, false, false, false]},
-        {'title': 'Do as we are told first time', data: [false, false, false, false, false, false, false]},
-        {'title': 'Use positive words and actions', data: [false, true, false, true, false, false, false]}
+        {'title': 'Love our family', data: [true, true, true, false, false, false, false], type: 'checkmark'},
+        {'title': 'Listen to and respect each other', data: [false, true, true, true, false, false, false], type: 'checkmark'},
+        {'title': 'Persevere and try hard', data: [true, true, false, true, false, false, false], type: 'checkmark'},
+        {'title': 'Do as we are told first time', data: [false, false, false, false, false, false, false], type: 'checkmark'},
+        {'title': 'Use positive words and actions', data: [false, true, false, true, false, false, false], type: 'checkmark'},
+        {'title': 'How are you feeling?', data: ['happy', 'ok', 'veryHappy', 'happy', 'ok', 'veryHappy', 'ill'], isEditable: true, type: 'emotion'},
+        {'title': 'How is your parent/carer feeling?', data: ['happy', 'happy', 'ecstatic', 'happy', 'ok', 'veryHappy', 'sad'], type: 'emotion'}
     ],
-    'Sam' : [
-        {'title': 'Love our family', data: [true, true, true, true, false, false, false]},
-        {'title': 'Listen to and respect each other', data: [false, true, false, true, false, false, false]},
-        {'title': 'Persevere and try hard', data: [false, false, false, true, false, false, false]},
-        {'title': 'Do as we are told first time', data: [false, true, false, true, false, false, false]},
-        {'title': 'Use positive words and actions', data: [true, false, false, true, false, false, false]}
+    'Charlie' : [
+        {'title': 'Love our family', data: [true, true, true, true, false, false, false], type: 'checkmark'},
+        {'title': 'Listen to and respect each other', data: [false, true, false, true, false, false, false], type: 'checkmark'},
+        {'title': 'Persevere and try hard', data: [false, false, false, true, false, false, false], type: 'checkmark'},
+        {'title': 'Do as we are told first time', data: [false, true, false, true, false, false, false], type: 'checkmark'},
+        {'title': 'Use positive words and actions', data: [true, false, false, true, false, false, false], type: 'checkmark'},
+        {'title': 'How are you feeling?', data: [null, 'sad', null, null, null, null, null], isEditable: true, type: 'emotion'},
+        {'title': 'How is your parent/carer feeling?', data: [null, 'sad', null, null, null, null, null], type: 'emotion'}
     ],
-    'Katy': [
-        {'title': 'Love our family', data: [true, true, true, false, false, false, false]},
-        {'title': 'Listen to and respect each other', data: [true, true, false, true, false, false, false]},
-        {'title': 'Persevere and try hard', data: [true, true, true, true, false, false, false]},
-        {'title': 'Do as we are told first time', data: [true, true, true, true, false, false, false]},
-        {'title': 'Use positive words and actions', data: [true, true, true, true, false, false, false]}
+    'Tessa': [
+        {'title': 'Love our family', data: [true, true, true, false, false, false, false], type: 'checkmark'},
+        {'title': 'Listen to and respect each other', data: [true, true, false, true, false, false, false], type: 'checkmark'},
+        {'title': 'Persevere and try hard', data: [true, true, true, true, false, false, false], type: 'checkmark'},
+        {'title': 'Do as we are told first time', data: [true, true, true, true, false, false, false], type: 'checkmark'},
+        {'title': 'Use positive words and actions', data: [true, true, true, true, false, false, false], type: 'checkmark'},
+        {'title': 'How are you feeling?', data: [null, 'sad', null, null, null, null, null], isEditable: true, type: 'emotion'},
+        {'title': 'How is your parent/carer feeling?', data: [null, 'sad', null, null, null, null, null], type: 'emotion'}
     ]
 
 }
@@ -42,15 +48,23 @@ function WeekView (props) {
     const [rows, setRows] = useState(DATA['Nathaniel']);
     const [students, setStudents] = useState([
         'Nathaniel',
-        'Sam',
-        'Katy'
+        'Charlie',
+        'Tessa'
     ]);
     const [tab, setTab] = useState(0);
 
-    const handleChange = (row, col) => {
-        console.log(row, col);
+    const handleChange = (row, col, val) => {
+        console.log(row, col, val);
         let newrow = rows.slice();
-        newrow[row].data[col] = !rows[row].data[col];
+        
+        if (val) {
+            // if optional value is supplied replace the old value
+            newrow[row].data[col] = val;
+        } else {
+            // otherwise assume a boolean is toggling
+            newrow[row].data[col] = !rows[row].data[col];
+        }
+        
         setRows(newrow);
     }
 
@@ -78,7 +92,7 @@ function WeekView (props) {
                 {buttons}
             </div>
             <div className="tab-content">
-                <Table columns={COLUMNS} rows={rows} onChange={(r, c) => handleChange(r, c)}/>
+                <Table columns={COLUMNS} rows={rows} onChange={(r, c, v) => handleChange(r, c, v)}/>
             </div>
         </div>
     )

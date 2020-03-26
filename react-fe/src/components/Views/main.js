@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import DayView from './dayView';
 import WeekView from './weekView';
 
-function MainView(props) {
+function MainView() {
     const [view_day, setView] = useState(true);
     const [btn_text, setBtnText] = useState("View Week");
 
