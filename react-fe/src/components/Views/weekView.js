@@ -45,6 +45,7 @@ function WeekView (props) {
         'Sam',
         'Katy'
     ]);
+    const [tab, setTab] = useState(0);
 
     const handleChange = (row, col) => {
         console.log(row, col);
@@ -53,19 +54,35 @@ function WeekView (props) {
         setRows(newrow);
     }
 
+    const changeTab = (i) => {
+        setRows(DATA[students[i]]);
+        setTab(i);
+    }
+
     const start = startOfWeek(date);
     const end = endOfWeek(date);
 
-    const buttons = students.map((name, i) => 
-        <button key={i} onClick={() => setRows(DATA[name])}>{name}</button>
+    const buttons = students.map((name, i) => {
+        let classname = 'tab';
+        if (i === tab) {
+            classname += ' active';
+        }
+        return <div className={classname} key={i}><a className="tab-link" onClick={() => changeTab(i)}>{name}</a></div>
+        }
     );
 
     return (
         <div>
             <h1>Week {format(date, 'w')}</h1>
             <h3>{format(start, 'do LLLL')} - {format(end, 'do LLLL')}</h3>
-            <Table columns={COLUMNS} rows={rows} onChange={(r, c) => handleChange(r, c)}/>
-            {buttons}
+            <div className="container">
+                <div className="tabs">
+                    {buttons}
+                </div>
+                <div className="tab-content">
+                    <Table columns={COLUMNS} rows={rows} onChange={(r, c) => handleChange(r, c)}/>
+                </div>
+            </div>
         </div>
     )
 
