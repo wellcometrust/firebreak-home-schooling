@@ -29,13 +29,12 @@ function DayView (props) {
     }
 
     return (
-        <div>
+        <div className="container">
             <h1>{format(day, 'EEEE do LLLL')}</h1>
-            <div className="container">
-                <Table columns={columns} rows={rows} onChange={(r, c) => handleChange(r, c)}/>
-            </div>
-            <button onClick={() => setDay(sub(day, {days: 1}))}>Previous</button>
-            <button onClick={() => setDay(add(day, {days: 1}))}>Next</button>
+            <Table columns={columns} rows={rows} onChange={(r, c) => handleChange(r, c)}/>
+            <br></br>
+            <button onClick={() => setDay(sub(day, {days: 1}))}>&laquo; Previous</button>
+            <button onClick={() => setDay(add(day, {days: 1}))}>Next &raquo;</button>
         </div>
     )
 }

@@ -72,16 +72,13 @@ function WeekView (props) {
     );
 
     return (
-        <div>
-            <h1>Week {format(date, 'w')}</h1>
-            <h3>{format(start, 'do LLLL')} - {format(end, 'do LLLL')}</h3>
-            <div className="container">
-                <div className="tabs">
-                    {buttons}
-                </div>
-                <div className="tab-content">
-                    <Table columns={COLUMNS} rows={rows} onChange={(r, c) => handleChange(r, c)}/>
-                </div>
+        <div className="container">
+            <h1>{format(start, 'do LLLL')} - {format(end, 'do LLLL')}</h1>
+            <div className="tabs">
+                {buttons}
+            </div>
+            <div className="tab-content">
+                <Table columns={COLUMNS} rows={rows} onChange={(r, c) => handleChange(r, c)}/>
             </div>
         </div>
     )

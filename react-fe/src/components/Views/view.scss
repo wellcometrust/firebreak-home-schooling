@@ -8,6 +8,22 @@ $light-cl: #c0e0f8;
     margin: auto;
 }
 
+button {
+    background-color: $active-cl;
+    padding: 10px 15px;
+    margin: 4px;
+    color: $pg-bck;
+    font-size: 1em;
+    border-radius: 3px;
+    border: 1px solid $active-cl;
+
+    &:hover {
+        background-color: $light-cl;
+        color: $active-cl;
+        cursor: pointer;
+    }
+}
+
 .tabs {
     margin-left: 10px;
 
