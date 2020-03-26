@@ -1,5 +1,5 @@
 $dark-color: #06355a;
-$light-color: #619ece38;
+$light-color: #c0e0f8;
 $bg-color: ghostwhite;
 
 
@@ -28,6 +28,8 @@ $bg-color: ghostwhite;
         padding: 8px 6px;
         text-align: center;
         border: 1px solid white;
+        border-top: 0px;
+        border-bottom: 2px solid white;
     }
 
     .tableItem:first-of-type {
@@ -39,7 +41,6 @@ $bg-color: ghostwhite;
 
 .checkbox-container {
     position: relative;
-    cursor: pointer;
     font-size: 22px;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -49,13 +50,13 @@ $bg-color: ghostwhite;
     input {
         position: absolute;
         opacity: 0;
-        cursor: pointer;
         height: 0;
         width: 0;
     }
 
     .checkmark {
         display: inline-block;
+        cursor: pointer;
         height: 25px;
         width: 25px;
         background-color: $bg-color;
@@ -91,5 +92,11 @@ $bg-color: ghostwhite;
         -webkit-transform: rotate(45deg);
         -ms-transform: rotate(45deg);
         transform: rotate(45deg);
-      }
+    }
+
+    & input:disabled ~ .checkmark{
+        background-color: $bg-color;
+        border: 1px solid $bg-color;
+        cursor: default;
+    }
 }

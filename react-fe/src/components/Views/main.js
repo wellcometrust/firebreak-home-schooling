@@ -4,6 +4,17 @@ import WeekView from './weekView';
 
 function MainView(props) {
     const [view_day, setView] = useState(true);
+    const [btn_text, setBtnText] = useState("View Week");
+
+    
+    const change_view = () => {
+        setView(!view_day);
+        if (!view_day) {
+            setBtnText("View Week")
+        } else {
+            setBtnText("View Day")
+        }
+    }
 
     const set_view = () => {
         if (view_day) {
@@ -15,7 +26,7 @@ function MainView(props) {
 
     return (
         <div>
-            <button onClick={() => setView(!view_day)}>Change View</button>
+            <button onClick={() => change_view()}>{btn_text}</button>
             <header className="App-header">
                 {set_view()}
             </header>
