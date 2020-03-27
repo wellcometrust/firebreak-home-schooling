@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import AdminContext from '../AdminContext/AdminContext';
 
@@ -22,47 +22,72 @@ import AdminContext from '../AdminContext/AdminContext';
 //     )
 // }
 
+const EmojiSelect = ({
+        emotion,
+        isDisabled,
+        k,
+        onChange,
+    }) => {
+    const [v, setV] = useState(null);
+    
+    const handleEmotionChange = (k, e) => {
+        setV(e.target.value);
+        onChange(k, e.target.value);
+    };
+
+    useEffect(() => {
+        setV(emotion !== null ? emotion : '?')
+
+        return () => {}
+    }, [emotion])
+
+    return (
+        <div className="tableItem">
+            {/* TODO - replace selects with EmotionChooser */}
+            <select
+                className="btn-emotion"
+                value={v}
+                disabled={isDisabled}
+                onChange={e => handleEmotionChange(k, e)}
+            >
+                <option value="?">?</option>
+                <option value="reallyIll">😷</option>
+                <option value="ill">😪</option>
+                <option value="sad">😢</option>
+                <option value="disappointed">😞</option>
+                <option value="ok">😐</option>
+                <option value="happy">🙂</option>
+                <option value="veryHappy">😃</option>
+                <option value="ecstatic">😜</option>
+                <option value="unicorn">🦄</option>
+            </select>
+        </div>
+    )
+}
+
 function Item({ value, onChange }) {
     const { isAdminActive } = useContext(AdminContext);
 
-    const checkmarks = value.data.map((child, key) => 
+    const checkmarks = value.data.map((checkmark, key) => 
         (
             <div key={key} className="tableItem">
                 <label className="checkbox-container">
-                    <input disabled={!isAdminActive} type="checkbox" checked={child} onChange={() => onChange(key)}/>
+                    <input disabled={!isAdminActive} type="checkbox" checked={checkmark} onChange={() => onChange(key)}/>
                     <span className="checkmark"></span>
                 </label>
             </div>
         )
     );
-    
-    const handleEmotionChange = useCallback((key, e) => {
-        onChange(key, e.target.value)
-    }, []);
 
-    const emotions = value.data.map((child, key) => 
-        (
-            <div key={key} className="tableItem">
-                <select
-                    className="btn-emotion"
-                    defaultValue={child !== null ? child : '?'}
-                    disabled={!value.isEditable && !isAdminActive}
-                    onChange={e => handleEmotionChange(key, e)}
-                >
-                    <option value="?">?</option>
-                    <option value="reallyIll">😷</option>
-                    <option value="ill">😪</option>
-                    <option value="sad">😢</option>
-                    <option value="disappointed">😞</option>
-                    <option value="ok">😐</option>
-                    <option value="happy">🙂</option>
-                    <option value="veryHappy">😃</option>
-                    <option value="ecstatic">😜</option>
-                    <option value="unicorn">🦄</option>
-                </select>
-            </div>
-        )
-    );
+    const emotions = value.data.map((emotion, key) => (
+        <EmojiSelect
+            emotion={emotion}
+            isDisabled={!value.isEditable && !isAdminActive}
+            key={key}
+            k={key}
+            onChange={(k, v) => onChange(k, v)}
+        />
+    ));
 
     return (
         <div className="tableRow">
