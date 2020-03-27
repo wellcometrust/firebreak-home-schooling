@@ -9,8 +9,8 @@ const DATA = {
         {'title': 'Persevere and try hard', data: [true, true, false, true, false, false, false], type: 'checkmark'},
         {'title': 'Do as we are told first time', data: [false, false, false, false, false, false, false], type: 'checkmark'},
         {'title': 'Use positive words and actions', data: [false, true, false, true, false, false, false], type: 'checkmark'},
-        {'title': 'How are you feeling?', data: ['happy', 'ok', 'veryHappy', 'happy', 'ok', 'veryHappy', 'ill'], isEditable: true, type: 'emotion'},
-        {'title': 'How is your parent/carer feeling?', data: ['happy', 'happy', 'ecstatic', 'happy', 'ok', 'veryHappy', 'sad'], type: 'emotion'}
+        {'title': 'How are you feeling?', data: ['happy', 'ok', 'veryHappy', 'disappointed', null, null, null], isEditable: true, type: 'emotion'},
+        {'title': 'How is your parent/carer feeling?', data: ['happy', 'happy', 'ecstatic', 'sad', null, null, null], type: 'emotion'}
     ],
     'Charlie' : [
         {'title': 'Love our family', data: [true, true, true, true, false, false, false], type: 'checkmark'},
@@ -18,7 +18,7 @@ const DATA = {
         {'title': 'Persevere and try hard', data: [false, false, false, true, false, false, false], type: 'checkmark'},
         {'title': 'Do as we are told first time', data: [false, true, false, true, false, false, false], type: 'checkmark'},
         {'title': 'Use positive words and actions', data: [true, false, false, true, false, false, false], type: 'checkmark'},
-        {'title': 'How are you feeling?', data: [null, 'sad', null, null, null, null, null], isEditable: true, type: 'emotion'},
+        {'title': 'How are you feeling?', data: [null, 'sad', 'ecstatic', null, null, null, null], isEditable: true, type: 'emotion'},
         {'title': 'How is your parent/carer feeling?', data: [null, 'sad', null, null, null, null, null], type: 'emotion'}
     ],
     'Tessa': [
@@ -44,6 +44,7 @@ const COLUMNS = [
 ];
 
 function WeekView (props) {
+    // console.log('render');
     const [date, setDate] = useState(new Date());
     const [rows, setRows] = useState(DATA['Nathaniel']);
     const [students, setStudents] = useState([
@@ -54,12 +55,15 @@ function WeekView (props) {
     const [tab, setTab] = useState(0);
 
     const handleChange = (row, col, val) => {
-        console.log(row, col, val);
-        let newrow = rows.slice();
+        // console.log('week', row, col, val);
+        const newrow = rows.slice();
+        // console.log('handleChange', rows);
         
         if (val) {
+            debugger
             // if optional value is supplied replace the old value
             newrow[row].data[col] = val;
+            // console.log(row, col, val);
         } else {
             // otherwise assume a boolean is toggling
             newrow[row].data[col] = !rows[row].data[col];
@@ -69,6 +73,7 @@ function WeekView (props) {
     }
 
     const changeTab = (i) => {
+        // console.log('changeTab', i)
         setRows(DATA[students[i]]);
         setTab(i);
     }
