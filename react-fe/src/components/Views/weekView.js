@@ -44,7 +44,6 @@ const COLUMNS = [
 ];
 
 function WeekView (props) {
-    // console.log('render');
     const [date, setDate] = useState(new Date());
     const [rows, setRows] = useState(DATA['Nathaniel']);
     const [students, setStudents] = useState([
@@ -55,15 +54,11 @@ function WeekView (props) {
     const [tab, setTab] = useState(0);
 
     const handleChange = (row, col, val) => {
-        // console.log('week', row, col, val);
         const newrow = rows.slice();
-        // console.log('handleChange', rows);
         
         if (val) {
-            debugger
             // if optional value is supplied replace the old value
             newrow[row].data[col] = val;
-            // console.log(row, col, val);
         } else {
             // otherwise assume a boolean is toggling
             newrow[row].data[col] = !rows[row].data[col];
@@ -73,7 +68,6 @@ function WeekView (props) {
     }
 
     const changeTab = (i) => {
-        // console.log('changeTab', i)
         setRows(DATA[students[i]]);
         setTab(i);
     }
