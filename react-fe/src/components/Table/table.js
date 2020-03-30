@@ -51,15 +51,15 @@ const EmojiSelect = ({
                 onChange={e => handleEmotionChange(k, e)}
             >
                 <option value="?">?</option>
-                <option value="reallyIll">😷</option>
-                <option value="ill">😪</option>
-                <option value="sad">😢</option>
-                <option value="disappointed">😞</option>
-                <option value="ok">😐</option>
-                <option value="happy">🙂</option>
-                <option value="veryHappy">😃</option>
-                <option value="ecstatic">😜</option>
                 <option value="unicorn">🦄</option>
+                <option value="ecstatic">😜</option>
+                <option value="veryHappy">😃</option>
+                <option value="happy">🙂</option>
+                <option value="ok">😐</option>
+                <option value="disappointed">😞</option>
+                <option value="sad">😢</option>
+                <option value="ill">😪</option>
+                <option value="reallyIll">😷</option>
             </select>
         </div>
     )
